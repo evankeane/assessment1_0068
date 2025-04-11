@@ -205,7 +205,18 @@ fun ScreenContent(modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.headlineMedium
             )
 
-
+            Button(
+                onClick = {
+                    amountInput = ""
+                    hasError = false
+                    selectedCurrency = "Dollar"
+                    result = 0f
+                },
+                contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text(text = stringResource(id = R.string.reset))
+            }
             Button(
                 onClick = {
                     val shareMessage = "Jumlah: Rp $amountInput\nKonversi ke $selectedCurrency = $result $selectedCurrency"
