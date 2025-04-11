@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Konversi Mata Uang</string>
+    <string name="konversi">Konversi</string>
+    <string name="hasil_konversi">Hasil: %1$.2f %2$s</string>
+    <string name="dollar">Dollar</string>
+    <string name="euro">Euro</string>
+    <string name="yen">Yen</string>
+    <string name="poundsterling">Poundsterling</string>
+    <string name="penjelasan_app">Aplikasi ini membantu Anda mengkonversi nilai Rupiah ke mata uang asing seperti Dolar, Euro, Yen, dan Poundsterling dengan mudah dan cepat.</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="kembali">Kembali</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="reset">Reset</string>
+    <string name="input_invalid">Input tidak boleh kosong</string>
+    <string name="placeholder_input">Masukkan Jumlah Rupiah</string>
+    <string name="rp">Rp</string>
+    <string name="judul_identitas">Identitas Pribadi</string>
+    <string name="nama">Nama : Abraham Evan Keane Nelwan</string>
+    <string name="nim">NIM : 607062300068</string>
+    <string name="kelas">Kelas : D3 RPLA 47-01</string>
+</resources>
