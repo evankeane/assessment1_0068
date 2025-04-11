@@ -12,7 +12,7 @@
         <string name="kembali">Return</string>
         <string name="bagikan">Share</string>
         <string name="reset">Reset</string>
-        <string name="input_invalid">Input cannot be empty</string>
+        <string name="input_invalid">Input cannot be empty Or Input must be numeric</string>
         <string name="placeholder_input">Input Rupiah Amount</string>
         <string name="rp">Rp</string>
         <string name="judul_identitas">Personal Identity</string>

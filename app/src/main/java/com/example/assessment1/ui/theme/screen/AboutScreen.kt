@@ -1,6 +1,9 @@
 package com.example.assessment1.ui.theme.screen
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,6 +29,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +43,7 @@ import com.example.assessment1.ui.theme.theme.Assessment1Theme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(navController: NavHostController) {
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             TopAppBar(
@@ -115,9 +122,31 @@ fun AboutScreen(navController: NavHostController) {
                     .fillMaxWidth()
                     .height(300.dp)
             )
+
+            Button(
+                onClick = {
+                    openInstagram(context, "evannelwann")
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Kunjungi Instagram")
+            }
         }
     }
 }
+
+fun openInstagram(context: Context, username: String) {
+    val instagramIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/$username"))
+    instagramIntent.setPackage("com.instagram.android")
+
+    val packageManager = context.packageManager
+    val canResolve = instagramIntent.resolveActivity(packageManager) != null
+
+    val fallbackIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/$username"))
+
+    context.startActivity(if (canResolve) instagramIntent else fallbackIntent)
+}
+
 
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)

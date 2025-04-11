@@ -12,7 +12,7 @@
     <string name="kembali">Kembali</string>
     <string name="bagikan">Bagikan</string>
     <string name="reset">Reset</string>
-    <string name="input_invalid">Input tidak boleh kosong</string>
+    <string name="input_invalid">Input tidak boleh kosong Atau Input harus berupa angka</string>
     <string name="placeholder_input">Masukkan Jumlah Rupiah</string>
     <string name="rp">Rp</string>
     <string name="judul_identitas">Identitas Pribadi</string>
