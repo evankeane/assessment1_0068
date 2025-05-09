@@ -1,36 +1,21 @@
 package com.example.assessment1.ui.theme.screen
+import androidx.compose.runtime.saveable.rememberSaveable
 
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +29,7 @@ import com.example.assessment1.ui.theme.theme.Assessment1Theme
 @Composable
 fun AboutScreen(navController: NavHostController) {
     val context = LocalContext.current
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -117,19 +103,57 @@ fun AboutScreen(navController: NavHostController) {
             Image(
                 painter = painterResource(id = R.drawable.sss),
                 contentDescription = "Gambar Kedua",
-
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(300.dp)
             )
 
+            // Dropdown Menu
+            var expanded by rememberSaveable { mutableStateOf(false) }
+            val options = listOf("Instagram", "GitHub")
+            var selectedOption by rememberSaveable { mutableStateOf(options[0]) }
+
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = { expanded = !expanded }
+            ) {
+                OutlinedTextField(
+                    value = selectedOption,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text("Pilih Media Sosial") },
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                    modifier = Modifier
+                        .menuAnchor()
+                        .fillMaxWidth()
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    options.forEach { selectionOption ->
+                        DropdownMenuItem(
+                            text = { Text(selectionOption) },
+                            onClick = {
+                                selectedOption = selectionOption
+                                expanded = false
+                            }
+                        )
+                    }
+                }
+            }
+
             Button(
                 onClick = {
-                    openInstagram(context, "evannelwann")
+                    when (selectedOption) {
+                        "Instagram" -> openInstagram(context, "evannelwann")
+                        "GitHub" -> openGithub(context, "https://github.com/evankeane")
+                    }
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Kunjungi Instagram")
+                Text("Kunjungi $selectedOption")
             }
         }
     }
@@ -147,6 +171,10 @@ fun openInstagram(context: Context, username: String) {
     context.startActivity(if (canResolve) instagramIntent else fallbackIntent)
 }
 
+fun openGithub(context: Context, url: String) {
+    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    context.startActivity(browserIntent)
+}
 
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
@@ -156,3 +184,4 @@ fun AboutScreenPreview() {
         AboutScreen(rememberNavController())
     }
 }
+
